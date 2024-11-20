@@ -5,10 +5,18 @@ using namespace std;
 // Implement the node class we will need for our Binary Search Tree
 class Node {
 	public:
+	int key;
+	Node *right;
+	Node *left;
 		// the Node should contain
 		// 	- an integer "key" that holds the value of the Node
 		// 	- a pointer to each child possible child node ("right" and "left")
 
+		Node(int inData = 0){
+			key = inData;
+			right = nullptr;
+			left = nullptr;
+		}
 
 		// Write a constructor for the Node
 		// input: only an integer value for "key", no pointer arguments
@@ -22,6 +30,19 @@ class Node {
 Node* createTree() {
 	// root
 	Node *root = nullptr;
+
+		root = new Node(13);
+		root->left = new Node(0);
+		root->left->right = new Node(7);
+		root->left->right->left = new Node(6);
+		root->right = new Node(21);
+		root->right->left = new Node(15);
+		root->left->left = new Node(-2);
+		root->left->right->right = new Node(12);
+		root->right->right = new Node(99);
+		root->right->left->right = new node(18);
+		root->right->left->right->right = new Node(19);
+		root->left->left->right = new Node(-1);
 
 	// level 1 (children of root)
 
@@ -48,12 +69,14 @@ Node* createTree() {
 // 	returns: true or false depending on if the value is found
 // You should write this function recursively! What is the base case? What is the general case?
 bool searchTree(int target, Node* root) {
-	// Base cases
-	return false;
-
-	// General case
-	return false;
+	if(root == nullptr){
+		return false;
+	}
+	if(root->data == target){
+		return true;
+	}
 	
+
 }
 
 // Write a function that will return the total number of Nodes in the tree
