@@ -40,7 +40,7 @@ Node* createTree() {
 		root->left->left = new Node(-2);
 		root->left->right->right = new Node(12);
 		root->right->right = new Node(99);
-		root->right->left->right = new node(18);
+		root->right->left->right = new Node(18);
 		root->right->left->right->right = new Node(19);
 		root->left->left->right = new Node(-1);
 
@@ -72,10 +72,14 @@ bool searchTree(int target, Node* root) {
 	if(root == nullptr){
 		return false;
 	}
-	if(root->data == target){
+	if(root->key == target){
 		return true;
 	}
-	
+	if(target < root->key){
+		return searchTree(target, root->left);
+	}else{
+		return searchTree(target, root->right);
+	}
 
 }
 
@@ -84,19 +88,24 @@ bool searchTree(int target, Node* root) {
 // 	returns: number of nodes currently in the tree
 // You should write this function recursively!
 int treeSize(Node* root) {
-	// base case
-	return -1;
-
-	// General case
-	return -1;
+	if(root == nullptr){
+		return 0;
+	}
+	else{
+		return 1 + treeSize(root->right) + treeSize(root->left);
+	}
 
 }
 
 // BONUS! Write a function that will determine the height of the tree
 int treeHeight(Node* root) {
 	// base case
-	return -1;
+	if(root == nullptr){
+		return -1;
+	}
 
 	// General case
-	return -1;
+	int left = treeHeight(root->left);
+	int right = treeHeight(root->right);
+	return 1 + max(left, right);
 }
